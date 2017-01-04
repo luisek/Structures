@@ -5,11 +5,11 @@
 
 namespace mpb
 {
-	class EmptyStackException : std::logic_error
+	class StackException : std::logic_error
 	{
 	public:
-		EmptyStackException(const std::string& what_arg);
-		~EmptyStackException();
+		StackException(const std::string& what_arg);
+		~StackException();
 		const char* what() const override;
 	private:
 		std::string message;
@@ -41,7 +41,15 @@ namespace mpb
 		inline void canPopElement()
 		{
 			if (empty())
-				throw EmptyStackException("pop from empty stack");
+				throw StackException("pop from empty stack");
+		}
+
+		inline void checkStackSize()
+		{
+			if (stackSize == inserter)
+			{
+				allocateNewStack(stackSize * 2);
+			}
 		}
 
 		void allocateNewStack(int newStackSize);

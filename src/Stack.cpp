@@ -8,6 +8,8 @@ Stack::Stack(int size) : stackSize{size}
 
 Stack::Stack(std::initializer_list<int> items, int size) : stackSize{size}
 {
+	if (size < items.size())
+		throw StackException("Too many items - stack size should be equal to items count");
 	elements = new int[stackSize];
 	for (auto it = items.begin(); it != items.end() && inserter < stackSize; ++it, incrementIndexes())
 	{
@@ -30,10 +32,7 @@ int Stack::pop()
 
 void Stack::push(int value)
 {
-	if (stackSize == inserter)
-	{
-		allocateNewStack(stackSize * 2);
-	}
+	checkStackSize();
 	elements[inserter] = value;
 	incrementIndexes();
 }
@@ -46,7 +45,6 @@ bool Stack::empty()
 void Stack::allocateNewStack(int newStackSize)
 {
 	int* newStack = new int[newStackSize];
-
 	for (auto i = 0; i < inserter; ++i)
 	{
 		newStack[i] = elements[i];
@@ -55,15 +53,15 @@ void Stack::allocateNewStack(int newStackSize)
 	elements = newStack;
 }
 
-EmptyStackException::EmptyStackException(const std::string& what_arg) : message{what_arg}, logic_error { what_arg }
+StackException::StackException(const std::string& what_arg) : message{what_arg}, logic_error { what_arg }
 {
 
 }
 
-EmptyStackException::~EmptyStackException()
+StackException::~StackException()
 {
 }
-const char* EmptyStackException::what() const
+const char* StackException::what() const
 {
 	return message.c_str();
 }

@@ -25,7 +25,7 @@ BOOST_AUTO_TEST_CASE(Stack_CreateEmpty_PopFromEmpty)
 {
 	mpb::Stack stack{};
 	BOOST_CHECK_EQUAL(stack.empty(), true);
-	BOOST_CHECK_THROW(stack.pop(), mpb::EmptyStackException);
+	BOOST_CHECK_THROW(stack.pop(), mpb::StackException);
 }
 
 BOOST_AUTO_TEST_CASE(Stack_CreateAndPush)
@@ -70,6 +70,20 @@ BOOST_AUTO_TEST_CASE(Stack_CreateAndPushMoreThan10Elements)
 	BOOST_CHECK_EQUAL(stack.pop(), 1);
 	BOOST_CHECK_EQUAL(stack.empty(), true);
 
+}
+
+BOOST_AUTO_TEST_CASE(Stack_CreateBigStack_InitializerListExcept)
+{
+	BOOST_CHECK_THROW(mpb::Stack stack({1,2,3,4,5,6,7,8,9,10,11,12,13}), mpb::StackException);
+}
+
+BOOST_AUTO_TEST_CASE(Stack_CreateBigStack_InitializerList)
+{
+	mpb::Stack stack({ 1,2,3,4,5,6,7,8,9,10,11,12,13 }, 13);
+	for (auto i = 0; i < 13; ++i)
+	{
+		BOOST_CHECK_EQUAL(stack.pop(), 13 - i);
+	}
 }
 
 BOOST_AUTO_TEST_SUITE_END()
