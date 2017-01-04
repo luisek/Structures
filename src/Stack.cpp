@@ -22,8 +22,7 @@ Stack::~Stack()
 
 int Stack::pop()
 {
-	if (empty())
-		throw EmptyStackException("pop from empty stack");
+	canPopElement();
 	auto value = elements[currentElement];
 	decrementIndexes();
 	return value;
