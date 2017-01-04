@@ -16,6 +16,17 @@ namespace mpb
 		void push(int value);
 		bool empty();
 	private:
+		inline void incrementIndexes()
+		{
+			++currentElement;
+			++inserter;
+		}
+		inline void decrementIndexes()
+		{
+			--currentElement;
+			--inserter;
+		}
+
 		int* elements;
 		int stackSize;
 		int currentElement = -1;

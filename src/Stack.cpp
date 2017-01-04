@@ -9,7 +9,7 @@ Stack::Stack(int size) : stackSize{size}
 Stack::Stack(std::initializer_list<int> items, int size) : stackSize{size}
 {
 	elements = new int[stackSize];
-	for (auto it = items.begin(); it != items.end() && inserter < stackSize; ++it, ++inserter, ++currentElement)
+	for (auto it = items.begin(); it != items.end() && inserter < stackSize; ++it, incrementIndexes())
 	{
 		elements[inserter] = *it;
 	}
@@ -25,16 +25,14 @@ int Stack::pop()
 	if (empty())
 		throw EmptyStackException("pop from empty stack");
 	auto value = elements[currentElement];
-	--inserter;
-	--currentElement;
+	decrementIndexes();
 	return value;
 }
 
 void Stack::push(int value)
 {
 	elements[inserter] = value;
-	++currentElement;
-	++inserter;
+	incrementIndexes();
 }
 
 bool Stack::empty()

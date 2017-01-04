@@ -31,12 +31,13 @@ BOOST_AUTO_TEST_CASE(Stack_CreateEmpty_PopFromEmpty)
 BOOST_AUTO_TEST_CASE(Stack_CreateAndPush)
 {
 	mpb::Stack stack{};
-	BOOST_CHECK_EQUAL(stack.empty(), true);
 	stack.push(10);
 	stack.push(20);
 	BOOST_CHECK_EQUAL(stack.empty(), false);
 	BOOST_CHECK_EQUAL(stack.pop(), 20);
 	BOOST_CHECK_EQUAL(stack.pop(), 10);
 }
+
+
 
 BOOST_AUTO_TEST_SUITE_END()
