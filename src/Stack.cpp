@@ -44,7 +44,7 @@ bool Stack::empty()
 void Stack::allocateNewStack(int newStackSize)
 {
 	int* newStack = new int[newStackSize];
-	for (auto i = 0; i < inserter; ++i)
+	for (auto i = 0; i < stackSize; ++i)
 	{
 		newStack[i] = elements[i];
 	}
