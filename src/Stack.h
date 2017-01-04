@@ -5,14 +5,17 @@ namespace mpb
 	class Stack
 	{
 	public:
-		Stack();
-		explicit Stack(int item);
+		Stack(int size = 10);
+		explicit Stack(int item, int size=10);
+		~Stack();
 
 		int pop();
 		void push(int value);
 		bool empty();
 	private:
-		int element;
+		int* elements;
+		int stackSize;
+		int currentElement = -1;
 
 	};
 }
