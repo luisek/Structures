@@ -22,6 +22,8 @@ Stack::~Stack()
 
 int Stack::pop()
 {
+	if (empty())
+		throw EmptyStackException("pop from empty stack");
 	auto value = elements[currentElement];
 	--inserter;
 	--currentElement;
@@ -37,5 +39,18 @@ void Stack::push(int value)
 
 bool Stack::empty()
 {
-	return 0 >= currentElement ? true : false;
+	return 0 > currentElement ? true : false;
+}
+
+EmptyStackException::EmptyStackException(const std::string& what_arg) : message{what_arg}, logic_error { what_arg }
+{
+
+}
+
+EmptyStackException::~EmptyStackException()
+{
+}
+const char* EmptyStackException::what() const
+{
+	return message.c_str();
 }

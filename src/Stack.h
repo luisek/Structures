@@ -1,6 +1,7 @@
 #ifndef __STACK_H___
 #define __STACK_H___
 #include <initializer_list>
+#include <stdexcept>
 
 namespace mpb
 {
@@ -20,6 +21,16 @@ namespace mpb
 		int currentElement = -1;
 		int inserter = 0;
 
+	};
+
+	class EmptyStackException : std::logic_error
+	{
+	public:
+		EmptyStackException(const std::string& what_arg);
+		~EmptyStackException();
+		const char* what() const override;
+	private:
+		std::string message;
 	};
 }
 
