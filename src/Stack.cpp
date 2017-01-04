@@ -9,7 +9,7 @@ Stack::Stack(int size) : stackSize{size}
 Stack::Stack(std::initializer_list<int> items, int size) : stackSize{size}
 {
 	if (size < items.size())
-		throw StackException("Too many items - stack size should be equal to items count");
+		throw StackException("too many items - stack size should be equal to items count");
 	elements = new int[stackSize];
 	for (auto it = items.begin(); it != items.end() && inserter < stackSize; ++it, incrementIndexes())
 	{

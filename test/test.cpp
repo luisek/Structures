@@ -42,32 +42,16 @@ BOOST_AUTO_TEST_CASE(Stack_CreateAndPush)
 BOOST_AUTO_TEST_CASE(Stack_CreateAndPushMoreThan10Elements)
 {
 	mpb::Stack stack{};
-	stack.push(1);
-	stack.push(2);
-	stack.push(3);
-	stack.push(4);
-	stack.push(5);
-	stack.push(6);
-	stack.push(7);
-	stack.push(8);
-	stack.push(9);
-	stack.push(10);
-	stack.push(11);
-	stack.push(12);
-
+	for (auto i = 0; i < 12; ++i)
+	{
+		stack.push(i + 1);
+	}
 	BOOST_CHECK_EQUAL(stack.empty(), false);
-	BOOST_CHECK_EQUAL(stack.pop(), 12);
-	BOOST_CHECK_EQUAL(stack.pop(), 11);
-	BOOST_CHECK_EQUAL(stack.pop(), 10);
-	BOOST_CHECK_EQUAL(stack.pop(), 9);
-	BOOST_CHECK_EQUAL(stack.pop(), 8);
-	BOOST_CHECK_EQUAL(stack.pop(), 7);
-	BOOST_CHECK_EQUAL(stack.pop(), 6);
-	BOOST_CHECK_EQUAL(stack.pop(), 5);
-	BOOST_CHECK_EQUAL(stack.pop(), 4);
-	BOOST_CHECK_EQUAL(stack.pop(), 3);
-	BOOST_CHECK_EQUAL(stack.pop(), 2);
-	BOOST_CHECK_EQUAL(stack.pop(), 1);
+
+	for (auto i = 0; i < 12; ++i)
+	{
+		BOOST_CHECK_EQUAL(stack.pop(), 12 - i);
+	}
 	BOOST_CHECK_EQUAL(stack.empty(), true);
 
 }
