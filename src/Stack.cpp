@@ -30,6 +30,10 @@ int Stack::pop()
 
 void Stack::push(int value)
 {
+	if (stackSize == inserter)
+	{
+		allocateNewStack(stackSize * 2);
+	}
 	elements[inserter] = value;
 	incrementIndexes();
 }
@@ -37,6 +41,18 @@ void Stack::push(int value)
 bool Stack::empty()
 {
 	return 0 > currentElement ? true : false;
+}
+
+void Stack::allocateNewStack(int newStackSize)
+{
+	int* newStack = new int[newStackSize];
+
+	for (auto i = 0; i < inserter; ++i)
+	{
+		newStack[i] = elements[i];
+	}
+	delete elements;
+	elements = newStack;
 }
 
 EmptyStackException::EmptyStackException(const std::string& what_arg) : message{what_arg}, logic_error { what_arg }

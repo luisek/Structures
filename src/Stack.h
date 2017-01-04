@@ -44,6 +44,8 @@ namespace mpb
 				throw EmptyStackException("pop from empty stack");
 		}
 
+		void allocateNewStack(int newStackSize);
+
 		int* elements;
 		int stackSize;
 		int currentElement = -1;
