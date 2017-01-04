@@ -70,4 +70,20 @@ BOOST_AUTO_TEST_CASE(Stack_CreateBigStack_InitializerList)
 	}
 }
 
+BOOST_AUTO_TEST_CASE(Stack_CreateBigStack)
+{
+	mpb::Stack stack{};
+	for (auto i = 0; i < 10056; ++i)
+	{
+		stack.push(i);
+	}
+	BOOST_CHECK_EQUAL(stack.pop(), 10055);
+	BOOST_CHECK_EQUAL(stack.pop(), 10054);
+	BOOST_CHECK_EQUAL(stack.pop(), 10053);
+
+	stack.push(10);
+	BOOST_CHECK_EQUAL(stack.pop(), 10);
+	BOOST_CHECK_EQUAL(stack.empty(), false);
+}
+
 BOOST_AUTO_TEST_SUITE_END()

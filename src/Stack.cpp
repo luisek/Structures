@@ -8,8 +8,7 @@ Stack::Stack(int size) : stackSize{size}
 
 Stack::Stack(std::initializer_list<int> items, int size) : stackSize{size}
 {
-	if (size < items.size())
-		throw StackException("too many items - stack size should be equal to items count");
+	checkStackConstruction(items.size(), stackSize);
 	elements = new int[stackSize];
 	for (auto it = items.begin(); it != items.end() && inserter < stackSize; ++it, incrementIndexes())
 	{
@@ -49,7 +48,8 @@ void Stack::allocateNewStack(int newStackSize)
 	{
 		newStack[i] = elements[i];
 	}
-	delete elements;
+	delete[] elements;
+	stackSize = newStackSize;
 	elements = newStack;
 }
 

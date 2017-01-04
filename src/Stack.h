@@ -44,6 +44,12 @@ namespace mpb
 				throw StackException("pop from empty stack");
 		}
 
+		inline void checkStackConstruction(int itemsCount, int stackSize)
+		{
+			if (stackSize < itemsCount)
+				throw StackException("too many items - stack size should be equal to items count");
+		}
+
 		inline void checkStackSize()
 		{
 			if (stackSize == inserter)
