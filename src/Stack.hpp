@@ -10,7 +10,7 @@ namespace mpb
 	public:
 		StackException(const std::string& what_arg);
 		~StackException();
-		const char* what() const override;
+		const char* what() const noexcept override;
 	private:
 		std::string message;
 	};
