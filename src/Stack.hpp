@@ -21,6 +21,12 @@ namespace mpb
 	public:
 		Stack(int size = 10);
 		explicit Stack(std::initializer_list<T> items, int size=10);
+		Stack(const Stack<T>& newStack);
+		Stack<T>& operator=(Stack<T> const & newStack);
+
+	/*	Stack(Stack<T>&& rStack);
+		Stack<T>& operator=(Stack<T>&& rStack);*/
+
 		~Stack();
 
 		T pop();
@@ -57,6 +63,29 @@ namespace mpb
 		{
 			elements[inserter] = *it;
 		}
+	}
+
+	template<typename T>
+	Stack<T>::Stack(const Stack<T>& source) : stackSize{source.stackSize}
+	{
+		elements = new T[stackSize];
+		for (auto i = 0; i < source.inserter; ++i)
+			push(source.elements[i]);
+	}
+	
+	template<typename T>
+	Stack<T>& Stack<T>::operator=(Stack<T>const& source)
+	{
+		//if(this == newStack) maybe
+		if (elements)
+			delete elements;
+		elements = new T[source.stackSize];
+		for (auto i = 0; i < source.inserter; ++i)
+		{
+			push(source.elements[i]);
+		}
+
+		return *this;
 	}
 
 	template<typename T>

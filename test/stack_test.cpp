@@ -86,4 +86,49 @@ BOOST_AUTO_TEST_CASE(Stack_CreateBigStack)
 	BOOST_CHECK_EQUAL(stack.empty(), false);
 }
 
+BOOST_AUTO_TEST_CASE(Stack_CopyCtorTest)
+{
+	mpb::Stack<int> stack{};
+	
+	stack.push(1);
+	stack.push(2);
+	stack.push(3);
+	stack.push(4);
+
+	mpb::Stack<int> newStack{ stack };
+
+	BOOST_CHECK_EQUAL(stack.pop(), newStack.pop());
+	BOOST_CHECK_EQUAL(stack.pop(), newStack.pop());
+	BOOST_CHECK_EQUAL(stack.pop(), newStack.pop());
+	BOOST_CHECK_EQUAL(stack.pop(), newStack.pop());
+
+	BOOST_CHECK_EQUAL(stack.empty(), true);
+	BOOST_CHECK_EQUAL(newStack.empty(), true);
+}
+
+BOOST_AUTO_TEST_CASE(Stack_CopyAssignmentTest)
+{
+	mpb::Stack<int> stack{};
+
+	stack.push(1);
+	stack.push(2);
+	stack.push(3);
+	stack.push(4);
+
+	mpb::Stack<int> newStack{};
+
+	BOOST_CHECK_EQUAL(newStack.empty(), true);
+
+	newStack = stack;
+
+	BOOST_CHECK_EQUAL(stack.pop(), newStack.pop());
+	BOOST_CHECK_EQUAL(stack.pop(), newStack.pop());
+	BOOST_CHECK_EQUAL(stack.pop(), newStack.pop());
+	BOOST_CHECK_EQUAL(stack.pop(), newStack.pop());
+
+	BOOST_CHECK_EQUAL(stack.empty(), true);
+	BOOST_CHECK_EQUAL(newStack.empty(), true);
+}
+
+
 BOOST_AUTO_TEST_SUITE_END()
