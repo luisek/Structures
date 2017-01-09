@@ -1,4 +1,3 @@
-#define BOOST_TEST_MODULE StackTest
 #include <boost/test/unit_test.hpp>
 
 #include "Stack.hpp"

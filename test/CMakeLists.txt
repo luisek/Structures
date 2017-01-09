@@ -6,8 +6,9 @@ include_directories (${STRUCTURES_SOURCE_DIR}/src
                      ${Boost_INCLUDE_DIRS}
                      )
 
-add_executable (Test stack_test.cpp)
+add_executable (Test stack_test.cpp list_test.cpp)
 target_link_libraries (Test
                        Stack
+					   List
                        ${Boost_LIBRARIES}
                        )
