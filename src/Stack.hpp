@@ -24,8 +24,8 @@ namespace mpb
 		Stack(const Stack<T>& newStack);
 		Stack<T>& operator=(Stack<T> const & newStack);
 
-	/*	Stack(Stack<T>&& rStack);
-		Stack<T>& operator=(Stack<T>&& rStack);*/
+	    Stack(Stack<T>&& rStack);
+		Stack<T>& operator=(Stack<T>&& rStack);
 
 		~Stack();
 
@@ -87,6 +87,37 @@ namespace mpb
 
 		return *this;
 	}
+
+	template<typename T>
+	Stack<T>::Stack(Stack<T>&& source)
+	{
+		elements = source.elements;
+		stackSize = source.stackSize;
+		currentElement = source.currentElement;
+		inserter = source.inserter;
+		source.elements = nullptr;
+		source.stackSize = 0;
+		source.currentElement = 0;
+		source.inserter = 0;
+	}
+
+	template<typename T>
+	Stack<T>& Stack<T>::operator=(Stack<T>&& source)
+	{
+		if (elements)
+			delete elements;
+		elements = source.elements;
+		stackSize = source.stackSize;
+		currentElement = source.currentElement;
+		inserter = source.inserter;
+		source.elements = nullptr;
+		source.stackSize = 0;
+		source.currentElement = 0;
+		source.inserter = 0;
+		return *this;
+	}
+
+
 
 	template<typename T>
 	Stack<T>::~Stack()

@@ -130,5 +130,46 @@ BOOST_AUTO_TEST_CASE(Stack_CopyAssignmentTest)
 	BOOST_CHECK_EQUAL(newStack.empty(), true);
 }
 
+BOOST_AUTO_TEST_CASE(Stack_MoveCtorTest)
+{
+	mpb::Stack<int> stack{};
+
+	stack.push(1);
+	stack.push(2);
+	stack.push(3);
+	stack.push(4);
+
+	mpb::Stack<int> newStack{ std::move(stack) };
+
+	BOOST_CHECK_EQUAL(newStack.pop(),4);
+	BOOST_CHECK_EQUAL(newStack.pop(),3);
+	BOOST_CHECK_EQUAL(newStack.pop(),2);
+	BOOST_CHECK_EQUAL(newStack.pop(),1);
+
+	BOOST_CHECK_EQUAL(newStack.empty(), true);
+}
+
+BOOST_AUTO_TEST_CASE(Stack_MoveAssignmentTest)
+{
+	mpb::Stack<int> stack{};
+
+	stack.push(1);
+	stack.push(2);
+	stack.push(3);
+	stack.push(4);
+
+	mpb::Stack<int> newStack{};
+
+	BOOST_CHECK_EQUAL(newStack.empty(), true);
+
+	newStack = std::move(stack);
+
+	BOOST_CHECK_EQUAL(newStack.pop(), 4);
+	BOOST_CHECK_EQUAL(newStack.pop(), 3);
+	BOOST_CHECK_EQUAL(newStack.pop(), 2);
+	BOOST_CHECK_EQUAL(newStack.pop(), 1);
+	BOOST_CHECK_EQUAL(newStack.empty(), true);
+}
+
 
 BOOST_AUTO_TEST_SUITE_END()
