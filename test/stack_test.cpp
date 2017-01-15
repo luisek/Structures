@@ -1,5 +1,5 @@
+#define BOOST_TEST_MODULE STRUCTURES
 #include <boost/test/unit_test.hpp>
-
 #include "Stack.hpp"
 
 BOOST_AUTO_TEST_SUITE(Stack)

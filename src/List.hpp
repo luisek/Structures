@@ -17,6 +17,21 @@ namespace mpb
 
 	class List
 	{
+    public:
+        List();
+		~List();
+
+        void push_back(int value);
+		int pop_back();
+    private:
+        struct Node
+        {
+            int value;
+            Node* next = nullptr;
+			Node(int _value, Node* node);
+        };
+
+        Node* head;
 
 	};
 }
