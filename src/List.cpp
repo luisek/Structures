@@ -25,9 +25,11 @@ List::List() : head{ nullptr }
 
 List::~List()
 {
-	while (head->next != nullptr)
+	while (head != nullptr)
 	{
-
+		Node* tmp = head;
+		head = tmp->next;
+		delete tmp;
 	}
 }
 
