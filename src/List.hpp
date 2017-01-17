@@ -17,22 +17,26 @@ namespace mpb
 
 	class List
 	{
-    public:
-        List();
+
+	public:
+		struct Node
+		{
+			int value;
+			Node* next = nullptr;
+			Node(int _value, Node* node);
+		};
+	    List();
 		~List();
 
         void push_back(int value);
 		int pop_back();
+		Node* find(int valueToFind);
+		inline bool empty()
+		{
+			return nullptr == head;
+		}
     private:
-        struct Node
-        {
-            int value;
-            Node* next = nullptr;
-			Node(int _value, Node* node);
-        };
-
         Node* head;
-
 	};
 }
 #endif

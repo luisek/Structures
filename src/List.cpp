@@ -47,3 +47,20 @@ int List::pop_back()
 	delete tmp;
 	return value;
 }
+
+List::Node* List::find(int valueToFind)
+{
+	Node* current = head;
+	while (nullptr != current)
+	{
+		if (valueToFind != current->value)
+		{
+			current = current->next;
+		}
+		else
+		{
+			break;
+		}
+	}
+	return current;
+}

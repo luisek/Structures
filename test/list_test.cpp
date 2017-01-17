@@ -21,4 +21,25 @@ BOOST_AUTO_TEST_CASE(List_PushWithoutPop)
 	BOOST_CHECK_EQUAL(10, myList.pop_back());
 }
 
+BOOST_AUTO_TEST_CASE(List_FindElement)
+{
+	mpb::List myList;
+
+	for (auto i = 0; i < 10; ++i)
+	{
+		myList.push_back(i);
+	}
+	mpb::List::Node* tmp = myList.find(8);
+	
+	BOOST_CHECK(tmp != nullptr);
+	BOOST_CHECK_EQUAL( 8, tmp->value);
+	BOOST_CHECK(!myList.empty());
+}
+
+BOOST_AUTO_TEST_CASE(List_Empty)
+{
+	mpb::List myList;
+	BOOST_CHECK(myList.empty());
+}
+
 BOOST_AUTO_TEST_SUITE_END()
