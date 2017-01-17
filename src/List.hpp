@@ -31,12 +31,17 @@ namespace mpb
         void push_back(int value);
 		int pop_back();
 		Node* find(int valueToFind);
-		inline bool empty()
+		inline bool empty() const
 		{
 			return nullptr == head;
 		}
+		inline int countElements() const
+		{
+			return count;
+		}
     private:
         Node* head;
+		int count = 0;
 	};
 }
 #endif

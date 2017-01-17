@@ -37,6 +37,7 @@ void List::push_back(int value)
 {
     Node* n = new Node{ value, head };
     head = n;
+	++count;
 }
 
 int List::pop_back()
@@ -45,6 +46,7 @@ int List::pop_back()
 	int value = tmp->value;
 	head = tmp->next;
 	delete tmp;
+	--count;
 	return value;
 }
 
