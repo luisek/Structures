@@ -23,6 +23,14 @@ List::List() : head{ nullptr }
 
 }
 
+List::List(std::initializer_list<int> values) : head{nullptr}
+{
+	for (const auto& x : values)
+	{
+		push_back(x);
+	}
+}
+
 List::~List()
 {
 	while (head != nullptr)
@@ -38,6 +46,11 @@ void List::push_back(int value)
     Node* n = new Node{ value, head };
     head = n;
 	++count;
+}
+
+void List::push_front(int value)
+{
+	
 }
 
 int List::pop_back()

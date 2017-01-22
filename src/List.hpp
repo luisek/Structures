@@ -26,10 +26,13 @@ namespace mpb
 			Node(int _value, Node* node);
 		};
 	    List();
+		List(std::initializer_list<int> values);
 		~List();
 
         void push_back(int value);
 		int pop_back();
+
+		void push_front(int value);
 		Node* find(int valueToFind);
 		inline bool empty() const
 		{

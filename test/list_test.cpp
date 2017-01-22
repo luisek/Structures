@@ -52,4 +52,47 @@ BOOST_AUTO_TEST_CASE(List_Count)
 	BOOST_CHECK_EQUAL(100, myList.countElements());
 }
 
+BOOST_AUTO_TEST_CASE(List_CreateAndPopElements)
+{
+	mpb::List list{ { 10,15,20,25,30 } };
+	
+	BOOST_CHECK_EQUAL(30, list.pop_back());
+	BOOST_CHECK_EQUAL(25, list.pop_back());
+	BOOST_CHECK_EQUAL(20, list.pop_back());
+	BOOST_CHECK_EQUAL(15, list.pop_back());
+	BOOST_CHECK_EQUAL(10, list.pop_back());
+}
+
+//BOOST_AUTO_TEST_CASE(List_CopyList)
+//{
+//	mpb::List list{ { 10,15,20,25,30 } };
+//	mpb::List newList(list);
+//
+//	BOOST_CHECK_EQUAL(30, list.pop_back());
+//	BOOST_CHECK_EQUAL(25, list.pop_back());
+//	BOOST_CHECK_EQUAL(20, list.pop_back());
+//	BOOST_CHECK_EQUAL(15, list.pop_back());
+//	BOOST_CHECK_EQUAL(10, list.pop_back());
+//
+//	BOOST_CHECK_EQUAL(30, newList.pop_back());
+//	BOOST_CHECK_EQUAL(25, newList.pop_back());
+//	BOOST_CHECK_EQUAL(20, newList.pop_back());
+//	BOOST_CHECK_EQUAL(15, newList.pop_back());
+//	BOOST_CHECK_EQUAL(10, newList.pop_back());
+//}
+
+//BOOST_AUTO_TEST_CASE(List_pushFront)
+//{
+//	mpb::List list{ { 10,15,20,25,30 } };
+//	
+//	list.push_front(1);
+//
+//	BOOST_CHECK_EQUAL(30, list.pop_back());
+//	BOOST_CHECK_EQUAL(25, list.pop_back());
+//	BOOST_CHECK_EQUAL(20, list.pop_back());
+//	BOOST_CHECK_EQUAL(15, list.pop_back());
+//	BOOST_CHECK_EQUAL(10, list.pop_back());
+//	BOOST_CHECK_EQUAL(1, list.pop_back());
+//}
+
 BOOST_AUTO_TEST_SUITE_END()
