@@ -50,7 +50,6 @@ void List::push_back(int value)
 		++count;
 		return;
 	}
-
 	tail->next = new Node{ value, nullptr };
 	tail = tail->next;
 	++count;
@@ -58,7 +57,13 @@ void List::push_back(int value)
 
 void List::push_front(int value)
 {
-	
+	if (nullptr == head)
+	{
+		Node* newNode = new Node{ value, head };
+		tail = head = newNode;
+	}
+	Node* newNode = new Node{value, head};
+	head = newNode;
 }
 
 int List::pop_back()
@@ -73,6 +78,7 @@ int List::pop_back()
 		retValue = head->value;
 		delete head;
 		head = tail = nullptr;
+		--count;
 		return retValue;
 	}
 
