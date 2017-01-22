@@ -111,4 +111,16 @@ BOOST_AUTO_TEST_CASE(List_popFromEmpty)
     BOOST_CHECK_THROW(list.pop_back(), mpb::ListException);
 }
 
+BOOST_AUTO_TEST_CASE(List_popFront)
+{
+	mpb::List list{ { 10,15,20,25,30 } };
+
+	BOOST_CHECK_EQUAL(10, list.pop_front());
+	BOOST_CHECK_EQUAL(15, list.pop_front());
+	BOOST_CHECK_EQUAL(20, list.pop_front());
+	BOOST_CHECK_EQUAL(25, list.pop_front());
+	BOOST_CHECK_EQUAL(30, list.pop_front());
+	BOOST_CHECK_EQUAL(true, list.empty());
+}
+
 BOOST_AUTO_TEST_SUITE_END()

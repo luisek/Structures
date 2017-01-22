@@ -33,6 +33,7 @@ namespace mpb
 		int pop_back();
 
 		void push_front(int value);
+		int pop_front();
 		Node* find(int valueToFind);
 		inline bool empty() const
 		{

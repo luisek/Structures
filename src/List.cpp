@@ -95,6 +95,17 @@ int List::pop_back()
 	return retValue;
 }
 
+int List::pop_front()
+{
+	if (!head)
+		throw ListException("Can't pop from empty list");
+	Node* newHead = head->next;
+	int retValue = head->value;
+	delete head;
+	head = newHead;
+	return retValue;
+}
+
 List::Node* List::find(int valueToFind)
 {
 	Node* current = head;
