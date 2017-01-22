@@ -18,12 +18,12 @@ List::Node::Node(int _value, Node* nd) : value(_value), next(nd)
 
 }
 
-List::List() : head{ nullptr }
+List::List() : head{ nullptr }, tail{nullptr}
 {
 
 }
 
-List::List(std::initializer_list<int> values) : head{nullptr}
+List::List(std::initializer_list<int> values) : head{nullptr}, tail{nullptr}
 {
 	for (const auto& x : values)
 	{
@@ -43,8 +43,16 @@ List::~List()
 
 void List::push_back(int value)
 {
-    Node* n = new Node{ value, head };
-    head = n;
+	if (nullptr == head)
+	{
+		head = new Node{value, nullptr};
+		tail = head;
+		++count;
+		return;
+	}
+
+	tail->next = new Node{ value, nullptr };
+	tail = tail->next;
 	++count;
 }
 
@@ -55,12 +63,30 @@ void List::push_front(int value)
 
 int List::pop_back()
 {
-	Node* tmp = head;
-	int value = tmp->value;
-	head = tmp->next;
-	delete tmp;
+	int retValue;
+	if (!head)
+	{
+		throw ListException("Can't pop from empty list");
+	}
+	if (head == tail)
+	{
+		retValue = head->value;
+		delete head;
+		head = tail = nullptr;
+		return retValue;
+	}
+
+	Node* current = head;
+	while (current->next != tail)
+	{
+		current = current->next;
+	}
+	retValue = tail->value;
+	delete tail;
+	tail = current;
+	tail->next = nullptr;
 	--count;
-	return value;
+	return retValue;
 }
 
 List::Node* List::find(int valueToFind)

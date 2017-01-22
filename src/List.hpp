@@ -44,6 +44,7 @@ namespace mpb
 		}
     private:
         Node* head;
+		Node* tail;
 		int count = 0;
 	};
 }
