@@ -69,7 +69,7 @@ void List::push_front(int value)
 int List::pop_back()
 {
 	int retValue;
-	if (!head)
+	if (empty())
 	{
 		throw ListException("Can't pop from empty list");
 	}

@@ -103,4 +103,12 @@ BOOST_AUTO_TEST_CASE(List_pushFrontOneElement)
 	BOOST_CHECK_EQUAL(1, list.pop_back());
 }
 
+BOOST_AUTO_TEST_CASE(List_popFromEmpty)
+{
+	mpb::List list{};
+
+	BOOST_CHECK_EQUAL(true, list.empty());
+    BOOST_CHECK_THROW(list.pop_back(), mpb::ListException);
+}
+
 BOOST_AUTO_TEST_SUITE_END()
