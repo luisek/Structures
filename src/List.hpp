@@ -32,6 +32,9 @@ namespace mpb
 		List(const List& lList);
 		List& operator=(const List& lList);
 
+		List(List&& rList);
+		List& operator=(List&& rList);
+
         void push_back(int value);
 		int pop_back();
 

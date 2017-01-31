@@ -41,6 +41,13 @@ List::List(const List& lList) : List()
 	}
 }
 
+List::List(List&& rList) : head{ rList.head }, tail{ rList.tail }, count{rList.count}
+{
+	rList.head = nullptr;
+	rList.tail = nullptr;
+	rList.count = 0;
+}
+
 List& List::operator=(const List& lList)
 {
 	Node* temp = lList.head;
@@ -49,6 +56,17 @@ List& List::operator=(const List& lList)
 		push_back(temp->value);
 		temp = temp->next;
 	}
+	return *this;
+}
+
+List& List::operator=(List&& rList)
+{
+	head = rList.head;
+	rList.head = nullptr;
+	tail = rList.tail;
+	rList.tail = nullptr;
+	count = rList.count;
+	rList.count = 0;
 	return *this;
 }
 
