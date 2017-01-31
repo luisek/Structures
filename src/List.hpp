@@ -29,6 +29,9 @@ namespace mpb
 		List(std::initializer_list<int> values);
 		~List();
 
+		List(const List& lList);
+		List& operator=(const List& lList);
+
         void push_back(int value);
 		int pop_back();
 

@@ -23,12 +23,33 @@ List::List() : head{ nullptr }, tail{nullptr}
 
 }
 
-List::List(std::initializer_list<int> values) : head{nullptr}, tail{nullptr}
+List::List(std::initializer_list<int> values) : List()
 {
 	for (const auto& x : values)
 	{
 		push_back(x);
 	}
+}
+
+List::List(const List& lList) : List()
+{
+	Node* temp = lList.head;
+	while (temp)
+	{
+		push_back(temp->value);
+		temp = temp->next;
+	}
+}
+
+List& List::operator=(const List& lList)
+{
+	Node* temp = lList.head;
+	while (temp)
+	{
+		push_back(temp->value);
+		temp = temp->next;
+	}
+	return *this;
 }
 
 List::~List()
