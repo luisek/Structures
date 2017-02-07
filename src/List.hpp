@@ -43,7 +43,7 @@ namespace mpb
 		Node* find(int valueToFind);
 		inline bool empty() const
 		{
-			return nullptr == head;
+            return nullptr == head && count == 0 ? true : false;
 		}
 		inline int countElements() const
 		{

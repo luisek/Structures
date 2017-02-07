@@ -148,12 +148,20 @@ BOOST_AUTO_TEST_CASE(List_pushFrontOneElement)
 	BOOST_CHECK_EQUAL(1, list.pop_back());
 }
 
-BOOST_AUTO_TEST_CASE(List_popFromEmpty)
+BOOST_AUTO_TEST_CASE(List_popBackFromEmpty)
 {
 	mpb::List list{};
 
 	BOOST_CHECK_EQUAL(true, list.empty());
     BOOST_CHECK_THROW(list.pop_back(), mpb::ListException);
+}
+
+BOOST_AUTO_TEST_CASE(List_popFrontFromEmpty)
+{
+    mpb::List list{};
+
+    BOOST_CHECK_EQUAL(true, list.empty());
+    BOOST_CHECK_THROW(list.pop_front(), mpb::ListException);
 }
 
 BOOST_AUTO_TEST_CASE(List_popFront)
@@ -166,6 +174,15 @@ BOOST_AUTO_TEST_CASE(List_popFront)
 	BOOST_CHECK_EQUAL(25, list.pop_front());
 	BOOST_CHECK_EQUAL(30, list.pop_front());
 	BOOST_CHECK_EQUAL(true, list.empty());
+}
+
+BOOST_AUTO_TEST_CASE(List_pushFrontOneElementAndPopFront)
+{
+    mpb::List list;
+
+    list.push_front(30);
+    BOOST_CHECK_EQUAL(30, list.pop_front());
+    BOOST_CHECK_EQUAL(true, list.empty());
 }
 
 BOOST_AUTO_TEST_SUITE_END()

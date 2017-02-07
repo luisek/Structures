@@ -100,9 +100,12 @@ void List::push_front(int value)
 	{
 		Node* newNode = new Node{ value, head };
 		tail = head = newNode;
+        ++count;
+        return;
 	}
 	Node* newNode = new Node{value, head};
 	head = newNode;
+    ++count;
 }
 
 int List::pop_back()
@@ -142,6 +145,7 @@ int List::pop_front()
 	int retValue = head->value;
 	delete head;
 	head = newHead;
+    --count;
 	return retValue;
 }
 
