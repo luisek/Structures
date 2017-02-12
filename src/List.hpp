@@ -29,10 +29,7 @@ namespace mpb
     {
 
     public:
-
-
         List();
-
         List(std::initializer_list<T> values);
         ~List();
         List(const List<T>& lList);
@@ -44,9 +41,7 @@ namespace mpb
         T pop_back();
         void push_front(T value);
         T pop_front();
-
         /*Node<T>* find(T valueToFind);*/
-
         inline bool empty() const;
         inline int countElements() const;
     private:
@@ -54,8 +49,6 @@ namespace mpb
         Node<T>* tail;
         int count = 0;
     };
-
-
     template<typename T>
     inline bool List<T>::empty() const
     {
