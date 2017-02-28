@@ -1,4 +1,5 @@
 add_library (Stack Stack.cpp Stack.hpp)
 add_library (List List.cpp List.hpp)
+add_library (BTree BTree.cpp BTree.hpp)
 add_executable(demo main.cpp)
 target_link_libraries(demo Stack List)
