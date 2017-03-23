@@ -59,7 +59,7 @@ void Tree::insert(Node* nd, int data)
     }
 }
         
-        bool Tree::valueExistInTree(Node* nd, int value)
+bool Tree::valueExistInTree(Node* nd, int value)
 {
     if (nd->data <= value)
     {
@@ -76,7 +76,9 @@ void Tree::insert(Node* nd, int data)
             valueExistInTree(root->left, value);
     }
     else
+    {
         return false;
+    }
 }
 
 void Tree::printElements(Node* temp)
