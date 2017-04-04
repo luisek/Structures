@@ -2,6 +2,5 @@ Structures implementation in C++
 1) Stack
 2) List
 3) BTree #it is very simle implementation
-4) ...
-comment only added for test :)
+4) FList
 
