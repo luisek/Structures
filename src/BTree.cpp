@@ -34,9 +34,9 @@ void Tree::print()
     else
     {
         printElements(root);
-        cout << '\n';
+        std::cout << '\n';
         printElements2(root);
-        cout << '\n';
+        std::cout << '\n';
         printElements3(root);
     }
 }
