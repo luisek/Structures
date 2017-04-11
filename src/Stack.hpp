@@ -151,7 +151,7 @@ namespace mpb
 	template<typename T>
 	void Stack<T>::allocateNewStack(int newStackSize)
 	{
-		int* newStack = new int[newStackSize];
+		T* newStack = new T[newStackSize];
 		for (auto i = 0; i < stackSize; ++i)
 		{
 			newStack[i] = elements[i];
