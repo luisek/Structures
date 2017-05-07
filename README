@@ -1,3 +1,8 @@
+TO DO list:
+1) Investigation of ctors with initialization list; ctos with initialization list  privileged and ctors with values can casted to initializationlist
+2) noexpect and constexpr
+3) we can hide implementation details of containers ex. list_impl.hpp is included by list.hpp
+ 
 Structures implementation in C++
 1) Stack
 2) List
