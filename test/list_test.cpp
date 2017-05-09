@@ -1,188 +1,197 @@
-#include <boost/test/unit_test.hpp>
 #include "List.hpp"
+#include <gtest\gtest.h>
 
-BOOST_AUTO_TEST_SUITE(List)
+class ListFixture : public ::testing::Test
+{
+protected:
+    void SetUp()
+    {
+    }
+    void TearDown()
+    {
+    }
 
-BOOST_AUTO_TEST_CASE(List_empty)
+};
+
+TEST_F(ListFixture, List_empty)
 {
     mpb::List<int> myList;
     myList.push_back(10);
-	
-	BOOST_CHECK_EQUAL(10, myList.pop_back());
+
+    ASSERT_EQ(10, myList.pop_back());
+    
 }
 
-BOOST_AUTO_TEST_CASE(List_PushWithoutPop)
+TEST_F(ListFixture, List_PushWithoutPop)
 {
-	mpb::List<int> myList;
-	myList.push_back(10);
-	myList.push_back(21);
+    mpb::List<int> myList;
+    myList.push_back(10);
+    myList.push_back(21);
 
-	BOOST_CHECK_EQUAL(21, myList.pop_back());
-	BOOST_CHECK_EQUAL(10, myList.pop_back());
+    ASSERT_EQ(21, myList.pop_back());
+    ASSERT_EQ(10, myList.pop_back());
 }
 
-BOOST_AUTO_TEST_CASE(List_FindElement)
+TEST_F(ListFixture, List_FindElement)
 {
-	//mpb::List<int> myList;
+    //mpb::List<int> myList;
 
-	//for (auto i = 0; i < 10; ++i)
-	//{
-	//	myList.push_back(i);
-	//}
-	//mpb::List<int>::Node<int>* tmp = myList.find(8);
-	//BOOST_CHECK(tmp != nullptr);
-	//BOOST_CHECK_EQUAL( 8, tmp->value);
-	//BOOST_CHECK(!myList.empty());
+    //for (auto i = 0; i < 10; ++i)
+    //{
+    //	myList.push_back(i);
+    //}
+    //mpb::List<int>::Node<int>* tmp = myList.find(8);
+    //BOOST_CHECK(tmp != nullptr);
+    //BOOST_CHECK_EQUAL( 8, tmp->value);
+    //BOOST_CHECK(!myList.empty());
 }
 
-BOOST_AUTO_TEST_CASE(List_Empty)
+TEST_F(ListFixture, List_Empty)
 {
-	mpb::List<int> myList;
-	BOOST_CHECK(myList.empty());
+    mpb::List<int> myList;
+    ASSERT_TRUE(myList.empty());
 }
 
-BOOST_AUTO_TEST_CASE(List_Count)
+TEST_F(ListFixture, List_Count)
 {
-	mpb::List<int> myList;
+    mpb::List<int> myList;
 
-	for (auto i = 0; i < 100; ++i)
-	{
-		myList.push_back(i + 1);
-	}
-	BOOST_CHECK_EQUAL(100, myList.countElements());
+    for (auto i = 0; i < 100; ++i)
+    {
+        myList.push_back(i + 1);
+    }
+    ASSERT_EQ(100, myList.countElements());
 }
 
-BOOST_AUTO_TEST_CASE(List_CreateAndPopElements)
+TEST_F(ListFixture, List_CreateAndPopElements)
 {
-	mpb::List<int> list{ { 10,15,20,25,30 } };
-	
-	BOOST_CHECK_EQUAL(30, list.pop_back());
-	BOOST_CHECK_EQUAL(25, list.pop_back());
-	BOOST_CHECK_EQUAL(20, list.pop_back());
-	BOOST_CHECK_EQUAL(15, list.pop_back());
-	BOOST_CHECK_EQUAL(10, list.pop_back());
+    mpb::List<int> list{ { 10,15,20,25,30 } };
+
+    ASSERT_EQ(30, list.pop_back());
+    ASSERT_EQ(25, list.pop_back());
+    ASSERT_EQ(20, list.pop_back());
+    ASSERT_EQ(15, list.pop_back());
+    ASSERT_EQ(10, list.pop_back());
 }
 
-BOOST_AUTO_TEST_CASE(List_CopyList)
+TEST_F(ListFixture, List_CopyList)
 {
-	mpb::List<int> list{ { 10,15,20,25,30 } };
-	mpb::List<int> newList(list);
+    mpb::List<int> list{ { 10,15,20,25,30 } };
+    mpb::List<int> newList(list);
 
-	BOOST_CHECK_EQUAL(30, list.pop_back());
-	BOOST_CHECK_EQUAL(25, list.pop_back());
-	BOOST_CHECK_EQUAL(20, list.pop_back());
-	BOOST_CHECK_EQUAL(15, list.pop_back());
-	BOOST_CHECK_EQUAL(10, list.pop_back());
+    ASSERT_EQ(30, list.pop_back());
+    ASSERT_EQ(25, list.pop_back());
+    ASSERT_EQ(20, list.pop_back());
+    ASSERT_EQ(15, list.pop_back());
+    ASSERT_EQ(10, list.pop_back());
 
-	BOOST_CHECK_EQUAL(30, newList.pop_back());
-	BOOST_CHECK_EQUAL(25, newList.pop_back());
-	BOOST_CHECK_EQUAL(20, newList.pop_back());
-	BOOST_CHECK_EQUAL(15, newList.pop_back());
-	BOOST_CHECK_EQUAL(10, newList.pop_back());
+    ASSERT_EQ(30, newList.pop_back());
+    ASSERT_EQ(25, newList.pop_back());
+    ASSERT_EQ(20, newList.pop_back());
+    ASSERT_EQ(15, newList.pop_back());
+    ASSERT_EQ(10, newList.pop_back());
 }
 
-BOOST_AUTO_TEST_CASE(List_CopyList_CopyAssignment)
+TEST_F(ListFixture, List_CopyList_CopyAssignment)
 {
-	mpb::List<int> list{ { 10,15,20,25,30 } };
-	mpb::List<int> newList;
-	newList = list;
+    mpb::List<int> list{ { 10,15,20,25,30 } };
+    mpb::List<int> newList;
+    newList = list;
 
-	BOOST_CHECK_EQUAL(30, list.pop_back());
-	BOOST_CHECK_EQUAL(25, list.pop_back());
-	BOOST_CHECK_EQUAL(20, list.pop_back());
-	BOOST_CHECK_EQUAL(15, list.pop_back());
-	BOOST_CHECK_EQUAL(10, list.pop_back());
+    ASSERT_EQ(30, list.pop_back());
+    ASSERT_EQ(25, list.pop_back());
+    ASSERT_EQ(20, list.pop_back());
+    ASSERT_EQ(15, list.pop_back());
+    ASSERT_EQ(10, list.pop_back());
 
-	BOOST_CHECK_EQUAL(30, newList.pop_back());
-	BOOST_CHECK_EQUAL(25, newList.pop_back());
-	BOOST_CHECK_EQUAL(20, newList.pop_back());
-	BOOST_CHECK_EQUAL(15, newList.pop_back());
-	BOOST_CHECK_EQUAL(10, newList.pop_back());
+    ASSERT_EQ(30, newList.pop_back());
+    ASSERT_EQ(25, newList.pop_back());
+    ASSERT_EQ(20, newList.pop_back());
+    ASSERT_EQ(15, newList.pop_back());
+    ASSERT_EQ(10, newList.pop_back());
 }
 
-BOOST_AUTO_TEST_CASE(List_MoveList)
+TEST_F(ListFixture, List_MoveList)
 {
-	mpb::List<int> list{ { 10,15,20,25,30 } };
-	mpb::List<int> newList(std::move(list));
+    mpb::List<int> list{ { 10,15,20,25,30 } };
+    mpb::List<int> newList(std::move(list));
 
-	BOOST_CHECK_EQUAL(30, newList.pop_back());
-	BOOST_CHECK_EQUAL(25, newList.pop_back());
-	BOOST_CHECK_EQUAL(20, newList.pop_back());
-	BOOST_CHECK_EQUAL(15, newList.pop_back());
-	BOOST_CHECK_EQUAL(10, newList.pop_back());
+    ASSERT_EQ(30, newList.pop_back());
+    ASSERT_EQ(25, newList.pop_back());
+    ASSERT_EQ(20, newList.pop_back());
+    ASSERT_EQ(15, newList.pop_back());
+    ASSERT_EQ(10, newList.pop_back());
 }
 
-BOOST_AUTO_TEST_CASE(List_ListMoveAssignment)
+TEST_F(ListFixture, List_ListMoveAssignment)
 {
-	mpb::List<int> list{ { 10,15,20,25,30 } };
-	mpb::List<int> newList;
+    mpb::List<int> list{ { 10,15,20,25,30 } };
+    mpb::List<int> newList;
 
-	newList = std::move(list);
+    newList = std::move(list);
 
-	BOOST_CHECK_EQUAL(30, newList.pop_back());
-	BOOST_CHECK_EQUAL(25, newList.pop_back());
-	BOOST_CHECK_EQUAL(20, newList.pop_back());
-	BOOST_CHECK_EQUAL(15, newList.pop_back());
-	BOOST_CHECK_EQUAL(10, newList.pop_back());
+    ASSERT_EQ(30, newList.pop_back());
+    ASSERT_EQ(25, newList.pop_back());
+    ASSERT_EQ(20, newList.pop_back());
+    ASSERT_EQ(15, newList.pop_back());
+    ASSERT_EQ(10, newList.pop_back());
 }
 
-BOOST_AUTO_TEST_CASE(List_pushFront)
+TEST_F(ListFixture, List_pushFront)
 {
-	mpb::List<int> list{ { 10,15,20,25,30 } };
-	
-	list.push_front(1);
+    mpb::List<int> list{ { 10,15,20,25,30 } };
 
-	BOOST_CHECK_EQUAL(30, list.pop_back());
-	BOOST_CHECK_EQUAL(25, list.pop_back());
-	BOOST_CHECK_EQUAL(20, list.pop_back());
-	BOOST_CHECK_EQUAL(15, list.pop_back());
-	BOOST_CHECK_EQUAL(10, list.pop_back());
-	BOOST_CHECK_EQUAL(1, list.pop_back());
+    list.push_front(1);
+
+    ASSERT_EQ(30, list.pop_back());
+    ASSERT_EQ(25, list.pop_back());
+    ASSERT_EQ(20, list.pop_back());
+    ASSERT_EQ(15, list.pop_back());
+    ASSERT_EQ(10, list.pop_back());
+    ASSERT_EQ(1, list.pop_back());
 }
 
-BOOST_AUTO_TEST_CASE(List_pushFrontOneElement)
-{
-	mpb::List<int> list{};
-
-	list.push_front(1);
-	BOOST_CHECK_EQUAL(1, list.pop_back());
-}
-
-BOOST_AUTO_TEST_CASE(List_popBackFromEmpty)
-{
-	mpb::List<int> list{};
-
-	BOOST_CHECK_EQUAL(true, list.empty());
-    BOOST_CHECK_THROW(list.pop_back(), mpb::ListException);
-}
-
-BOOST_AUTO_TEST_CASE(List_popFrontFromEmpty)
+TEST_F(ListFixture, List_pushFrontOneElement)
 {
     mpb::List<int> list{};
 
-    BOOST_CHECK_EQUAL(true, list.empty());
-    BOOST_CHECK_THROW(list.pop_front(), mpb::ListException);
+    list.push_front(1);
+    ASSERT_EQ(1, list.pop_back());
 }
 
-BOOST_AUTO_TEST_CASE(List_popFront)
+TEST_F(ListFixture, List_popBackFromEmpty)
 {
-	mpb::List<int> list{ { 10,15,20,25,30 } };
+    mpb::List<int> list{};
 
-	BOOST_CHECK_EQUAL(10, list.pop_front());
-	BOOST_CHECK_EQUAL(15, list.pop_front());
-	BOOST_CHECK_EQUAL(20, list.pop_front());
-	BOOST_CHECK_EQUAL(25, list.pop_front());
-	BOOST_CHECK_EQUAL(30, list.pop_front());
-	BOOST_CHECK_EQUAL(true, list.empty());
+    ASSERT_EQ(true, list.empty());
+    ASSERT_THROW(list.pop_back(), mpb::ListException);
 }
 
-BOOST_AUTO_TEST_CASE(List_pushFrontOneElementAndPopFront)
+TEST_F(ListFixture, List_popFrontFromEmpty)
+{
+    mpb::List<int> list{};
+
+    ASSERT_EQ(true, list.empty());
+    ASSERT_THROW(list.pop_front(), mpb::ListException);
+}
+
+TEST_F(ListFixture, List_popFront)
+{
+    mpb::List<int> list{ { 10,15,20,25,30 } };
+
+    ASSERT_EQ(10, list.pop_front());
+    ASSERT_EQ(15, list.pop_front());
+    ASSERT_EQ(20, list.pop_front());
+    ASSERT_EQ(25, list.pop_front());
+    ASSERT_EQ(30, list.pop_front());
+    ASSERT_EQ(true, list.empty());
+}
+
+TEST_F(ListFixture, List_pushFrontOneElementAndPopFront)
 {
     mpb::List<int> list;
 
     list.push_front(30);
-    BOOST_CHECK_EQUAL(30, list.pop_front());
-    BOOST_CHECK_EQUAL(true, list.empty());
+    ASSERT_EQ(30, list.pop_front());
+    ASSERT_EQ(true, list.empty());
 }
-
-BOOST_AUTO_TEST_SUITE_END()
