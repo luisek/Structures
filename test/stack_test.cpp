@@ -1,5 +1,5 @@
 #include "Stack.hpp"
-#include <gtest\gtest.h>
+#include <gtest/gtest.h>
 
 class StackFixture : public ::testing::Test
 {
