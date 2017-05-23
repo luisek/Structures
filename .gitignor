@@ -1,2 +1,3 @@
 #ignore all files in out/ direcotry
-out/
+out/*
+.vscode/*
