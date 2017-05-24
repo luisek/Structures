@@ -1,4 +1,5 @@
-add_library (Stack Stack_impl.cpp Stack_impl.hpp)
+add_library (StackImpl Stack_impl.cpp Stack_impl.hpp)
+add_library (Stack Stack.cpp Stack.hpp)
 add_library (List List.cpp List.hpp)
 add_library (BTree BTree.cpp BTree.hpp)
 add_library (FList FList.cpp FList.hpp)
