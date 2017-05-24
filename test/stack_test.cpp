@@ -26,3 +26,28 @@ TEST_F(StackFixture, Stack_CreateAndPopElements)
 	ASSERT_EQ(stack.pop(), 15);
 	ASSERT_EQ(stack.pop(), 10);
 }
+
+TEST_F(StackFixture, Stack_CreateEmptyAndCheckIt)
+{
+	mpb::Stack<int> stack;
+    ASSERT_TRUE(stack.empty());
+}
+
+TEST_F(StackFixture, Stack_CreateEmptyPushAndCheck)
+{
+	mpb::Stack<int> stack;
+    ASSERT_TRUE(stack.empty());
+    stack.push(1);
+    ASSERT_FALSE(stack.empty());
+}
+
+TEST_F(StackFixture, Stack_CreateEmptyAndPush)
+{
+	mpb::Stack<int> stack;
+    for(auto i = 0; i < 10000; ++i)
+        stack.push(i);
+    
+    for(auto i = 10000 - 1; i == 0; --i)
+        ASSERT_EQ(stack.pop(), i);
+    
+}
