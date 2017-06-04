@@ -4,6 +4,7 @@
 #include <memory>
 #include <stdexcept>
 
+
 namespace mpb
 {
     class StackException : std::logic_error
