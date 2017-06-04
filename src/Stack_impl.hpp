@@ -77,7 +77,7 @@ namespace mpb
         {
             //if(this == newStack) maybe
             if (elements)
-                delete elements;
+                delete [] elements;
             elements = new T[source.stackSize];
             for (auto i = 0; i < source.inserter; ++i)
             {
@@ -104,7 +104,7 @@ namespace mpb
         StackImpl<T>& StackImpl<T>::operator=(StackImpl<T>&& source)
         {
             if (elements)
-                delete elements;
+                delete [] elements;
             elements = source.elements;
             stackSize = source.stackSize;
             currentElement = source.currentElement;
