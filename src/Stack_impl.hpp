@@ -1,5 +1,6 @@
 #pragma once
 #include <initializer_list>
+#include <memory>
 #include <stdexcept>
 
 namespace mpb
@@ -19,14 +20,12 @@ namespace mpb
         {
         public:
             StackImpl(int size = 10);
-            explicit StackImpl(std::initializer_list<T> items, int size=10);
-            StackImpl(const StackImpl<T>& newStack);
-            StackImpl<T>& operator=(StackImpl<T> const & newStack);
+            explicit StackImpl(std::initializer_list<T> items);
+            StackImpl(const StackImpl<T>& newStack) = delete;
+            StackImpl<T>& operator=(StackImpl<T> const & newStack) = delete;
 
             StackImpl(StackImpl<T>&& rStack);
             StackImpl<T>& operator=(StackImpl<T>&& rStack);
-
-            ~StackImpl();
 
             T pop();
             void push(T value);
@@ -35,11 +34,10 @@ namespace mpb
             inline void incrementIndexes();
             inline void decrementIndexes();
             inline void canPopElement();
-            inline void checkStackConstruction(int itemsCount, int stackSize);
             inline void checkStackSize();
             void allocateNewStack(int newStackSize);
 
-            T* elements;
+            std::unique_ptr<T[]> elements;
             int stackSize;
             int currentElement = -1;
             int inserter = 0;
@@ -50,47 +48,45 @@ namespace mpb
         template<typename T>
         StackImpl<T>::StackImpl(int size) : stackSize{ size }
         {
-            elements = new T[stackSize];
+            elements = std::make_unique<T[]>(stackSize);
         }
 
         template<typename T>
-        StackImpl<T>::StackImpl(std::initializer_list<T> items, int size) : stackSize{ size }
+        StackImpl<T>::StackImpl(std::initializer_list<T> items) : StackImpl(items.size())
         {
-            checkStackConstruction(items.size(), stackSize);
-            elements = new T[stackSize];
             for (auto it = items.begin(); it != items.end() && inserter < stackSize; ++it, incrementIndexes())
             {
                 elements[inserter] = *it;
             }
         }
 
-        template<typename T>
-        StackImpl<T>::StackImpl(const StackImpl<T>& source) : stackSize{source.stackSize}
-        {
-            elements = new T[stackSize];
-            for (auto i = 0; i < source.inserter; ++i)
-                push(source.elements[i]);
-        }
+        // template<typename T>
+        // StackImpl<T>::StackImpl(const StackImpl<T>& source) : stackSize{source.stackSize}
+        // {
+        //     elements = new T[stackSize];
+        //     for (auto i = 0; i < source.inserter; ++i)
+        //         push(source.elements[i]);
+        // }
         
-        template<typename T>
-        StackImpl<T>& StackImpl<T>::operator=(StackImpl<T>const& source)
-        {
-            //if(this == newStack) maybe
-            if (elements)
-                delete [] elements;
-            elements = new T[source.stackSize];
-            for (auto i = 0; i < source.inserter; ++i)
-            {
-                push(source.elements[i]);
-            }
+        // template<typename T>
+        // StackImpl<T>& StackImpl<T>::operator=(StackImpl<T>const& source)
+        // {
+        //     //if(this == newStack) maybe
+        //     if (elements)
+        //         delete [] elements;
+        //     elements = new T[source.stackSize];
+        //     for (auto i = 0; i < source.inserter; ++i)
+        //     {
+        //         push(source.elements[i]);
+        //     }
 
-            return *this;
-        }
+        //     return *this;
+        // }
 
         template<typename T>
         StackImpl<T>::StackImpl(StackImpl<T>&& source)
         {
-            elements = source.elements;
+            elements = std::move(source.elements);
             stackSize = source.stackSize;
             currentElement = source.currentElement;
             inserter = source.inserter;
@@ -104,8 +100,8 @@ namespace mpb
         StackImpl<T>& StackImpl<T>::operator=(StackImpl<T>&& source)
         {
             if (elements)
-                delete [] elements;
-            elements = source.elements;
+                elements.reset();
+            elements = std::move(source.elements);
             stackSize = source.stackSize;
             currentElement = source.currentElement;
             inserter = source.inserter;
@@ -114,14 +110,6 @@ namespace mpb
             source.currentElement = 0;
             source.inserter = 0;
             return *this;
-        }
-
-
-
-        template<typename T>
-        StackImpl<T>::~StackImpl()
-        {
-            delete[] elements;
         }
 
         template<typename T>
@@ -150,14 +138,14 @@ namespace mpb
         template<typename T>
         void StackImpl<T>::allocateNewStack(int newStackSize)
         {
-            T* newStack = new T[newStackSize];
+            std::unique_ptr<T[]> newStack = std::make_unique<T[]>(newStackSize);
             for (auto i = 0; i < stackSize; ++i)
             {
                 newStack[i] = elements[i];
             }
-            delete[] elements;
+            elements.reset();
             stackSize = newStackSize;
-            elements = newStack;
+            elements = std::move(newStack);
         }
 
         template<typename T>
@@ -179,13 +167,6 @@ namespace mpb
         {
             if (empty())
                 throw StackException("pop from empty stack");
-        }
-
-        template<typename T>
-        inline void StackImpl<T>::checkStackConstruction(int itemsCount, int stackSize)
-        {
-            if (stackSize < itemsCount)
-                throw StackException("too many items - stack size should be equal to items count");
         }
 
         template<typename T>

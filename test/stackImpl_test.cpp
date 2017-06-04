@@ -65,12 +65,12 @@ TEST_F(StackImplFixture, Stack_CreateAndPushMoreThan10Elements)
 
 TEST_F(StackImplFixture, Stack_CreateBigStack_InitializerListExcept)
 {
-	ASSERT_THROW(mpb::StackImpl<int> stack({1,2,3,4,5,6,7,8,9,10,11,12,13}), mpb::StackException);
+	ASSERT_NO_THROW(mpb::StackImpl<int> stack({1,2,3,4,5,6,7,8,9,10,11,12,13}));
 }
 
 TEST_F(StackImplFixture, Stack_CreateBigStack_InitializerList)
 {
-	mpb::StackImpl<int> stack({ 1,2,3,4,5,6,7,8,9,10,11,12,13 }, 13);
+	mpb::StackImpl<int> stack({ 1,2,3,4,5,6,7,8,9,10,11,12,13 });
 	for (auto i = 0; i < 13; ++i)
 	{
 		ASSERT_EQ(stack.pop(), 13 - i);
@@ -93,49 +93,49 @@ TEST_F(StackImplFixture, Stack_CreateBigStack)
 	ASSERT_EQ(stack.empty(), false);
 }
 
-TEST_F(StackImplFixture, Stack_CopyCtorTest)
-{
-	mpb::StackImpl<int> stack{};
+// TEST_F(StackImplFixture, Stack_CopyCtorTest)
+// {
+// 	mpb::StackImpl<int> stack{};
 	
-	stack.push(1);
-	stack.push(2);
-	stack.push(3);
-	stack.push(4);
+// 	stack.push(1);
+// 	stack.push(2);
+// 	stack.push(3);
+// 	stack.push(4);
 
-	mpb::StackImpl<int> newStack{ stack };
+// 	mpb::StackImpl<int> newStack{ stack };
 
-	ASSERT_EQ(stack.pop(), newStack.pop());
-	ASSERT_EQ(stack.pop(), newStack.pop());
-	ASSERT_EQ(stack.pop(), newStack.pop());
-	ASSERT_EQ(stack.pop(), newStack.pop());
+// 	ASSERT_EQ(stack.pop(), newStack.pop());
+// 	ASSERT_EQ(stack.pop(), newStack.pop());
+// 	ASSERT_EQ(stack.pop(), newStack.pop());
+// 	ASSERT_EQ(stack.pop(), newStack.pop());
 
-	ASSERT_EQ(stack.empty(), true);
-	ASSERT_EQ(newStack.empty(), true);
-}
+// 	ASSERT_EQ(stack.empty(), true);
+// 	ASSERT_EQ(newStack.empty(), true);
+// }
 
-TEST_F(StackImplFixture, Stack_CopyAssignmentTest)
-{
-	mpb::StackImpl<int> stack{};
+// TEST_F(StackImplFixture, Stack_CopyAssignmentTest)
+// {
+// 	mpb::StackImpl<int> stack{};
 
-	stack.push(1);
-	stack.push(2);
-	stack.push(3);
-	stack.push(4);
+// 	stack.push(1);
+// 	stack.push(2);
+// 	stack.push(3);
+// 	stack.push(4);
 
-	mpb::StackImpl<int> newStack{};
+// 	mpb::StackImpl<int> newStack{};
 
-	ASSERT_EQ(newStack.empty(), true);
+// 	ASSERT_EQ(newStack.empty(), true);
 
-	newStack = stack;
+// 	newStack = stack;
 
-	ASSERT_EQ(stack.pop(), newStack.pop());
-	ASSERT_EQ(stack.pop(), newStack.pop());
-	ASSERT_EQ(stack.pop(), newStack.pop());
-	ASSERT_EQ(stack.pop(), newStack.pop());
+// 	ASSERT_EQ(stack.pop(), newStack.pop());
+// 	ASSERT_EQ(stack.pop(), newStack.pop());
+// 	ASSERT_EQ(stack.pop(), newStack.pop());
+// 	ASSERT_EQ(stack.pop(), newStack.pop());
 
-	ASSERT_EQ(stack.empty(), true);
-	ASSERT_EQ(newStack.empty(), true);
-}
+// 	ASSERT_EQ(stack.empty(), true);
+// 	ASSERT_EQ(newStack.empty(), true);
+// }
 
 TEST_F(StackImplFixture, Stack_MoveCtorTest)
 {
