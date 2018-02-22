@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Stack_impl.hpp"
 #include <initializer_list>
 #include <memory>
@@ -11,6 +12,8 @@ namespace mpb
 	{
 	public:
 		Stack(int size = 10);
+		Stack(const Stack<T>& rStack);
+		Stack<T>& operator=(const Stack<T>& rStack);
 	    Stack(Stack<T>&& rStack);
 		Stack<T>& operator=(Stack<T>&& rStack);
 
@@ -26,6 +29,18 @@ namespace mpb
 	Stack<T>::Stack(int size)
 	{
 		stackImpl = std::make_unique<StackImpl<T>>(size);
+	}
+
+	template<typename T>
+	Stack<T>::Stack(const Stack<T>& source)
+	{
+		stackImpl = std::make_unique<StackImpl<T>>(*(source.stackImpl));
+	}
+
+	template<typename T>
+	Stack<T>& Stack<T>::operator=(const Stack<T>& source)
+	{
+		*stackImpl = *source.stackImpl;
 	}
 
 	template<typename T>

@@ -51,3 +51,47 @@ TEST_F(StackFixture, Stack_CreateEmptyAndPush)
         ASSERT_EQ(stack.pop(), i);
     
 }
+
+TEST_F(StackFixture, Stack_CopyCtorTest)
+{
+	mpb::Stack<int> stack{};
+	
+	stack.push(1);
+	stack.push(2);
+	stack.push(3);
+	stack.push(4);
+
+	mpb::Stack<int> newStack{ stack };
+
+	ASSERT_EQ(stack.pop(), newStack.pop());
+	ASSERT_EQ(stack.pop(), newStack.pop());
+	ASSERT_EQ(stack.pop(), newStack.pop());
+	ASSERT_EQ(stack.pop(), newStack.pop());
+
+	ASSERT_EQ(stack.empty(), true);
+	ASSERT_EQ(newStack.empty(), true);
+}
+
+TEST_F(StackFixture, Stack_CopyAssignmentTest)
+{
+	mpb::Stack<int> stack{};
+
+ 	stack.push(1);
+ 	stack.push(2);
+ 	stack.push(3);
+	stack.push(4);
+
+	mpb::Stack<int> newStack{};
+
+	ASSERT_EQ(newStack.empty(), true);
+
+	newStack = stack;
+
+	ASSERT_EQ(stack.pop(), newStack.pop());
+	ASSERT_EQ(stack.pop(), newStack.pop());
+	ASSERT_EQ(stack.pop(), newStack.pop());
+	ASSERT_EQ(stack.pop(), newStack.pop());
+
+	ASSERT_EQ(stack.empty(), true);
+	ASSERT_EQ(newStack.empty(), true);
+}
