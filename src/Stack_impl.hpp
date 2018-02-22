@@ -23,7 +23,7 @@ namespace mpb
             StackImpl(int size = 10);
             explicit StackImpl(std::initializer_list<T> items);
             StackImpl(const StackImpl<T>& newStack);
-            StackImpl<T>& operator=(StackImpl<T> const & newStack) = delete;
+            StackImpl<T>& operator=(const StackImpl<T>& newStack);
 
             StackImpl(StackImpl<T>&& rStack);
             StackImpl<T>& operator=(StackImpl<T>&& rStack);
@@ -69,20 +69,19 @@ namespace mpb
                 push(source.elements[i]);
         }
         
-        // template<typename T>
-        // StackImpl<T>& StackImpl<T>::operator=(StackImpl<T>const& source)
-        // {
-        //     //if(this == newStack) maybe
-        //     if (elements)
-        //         delete [] elements;
-        //     elements = new T[source.stackSize];
-        //     for (auto i = 0; i < source.inserter; ++i)
-        //     {
-        //         push(source.elements[i]);
-        //     }
-
-        //     return *this;
-        // }
+        template<typename T>
+        StackImpl<T>& StackImpl<T>::operator=(const StackImpl<T>& source)
+        {
+            //if(this == newStack) maybe
+            if (elements)
+                elements.reset();
+            elements = std::make_unique<T[]>(source.stackSize);
+            for (auto i = 0; i < source.inserter; ++i)
+            {
+                push(source.elements[i]);
+            }
+            return *this;
+        }
 
         template<typename T>
         StackImpl<T>::StackImpl(StackImpl<T>&& source)
