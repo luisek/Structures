@@ -1,4 +1,5 @@
 #pragma once
+
 #include <initializer_list>
 #include <memory>
 #include <stdexcept>
@@ -21,7 +22,7 @@ namespace mpb
         public:
             StackImpl(int size = 10);
             explicit StackImpl(std::initializer_list<T> items);
-            StackImpl(const StackImpl<T>& newStack) = delete;
+            StackImpl(const StackImpl<T>& newStack);
             StackImpl<T>& operator=(StackImpl<T> const & newStack) = delete;
 
             StackImpl(StackImpl<T>&& rStack);
@@ -60,13 +61,13 @@ namespace mpb
             }
         }
 
-        // template<typename T>
-        // StackImpl<T>::StackImpl(const StackImpl<T>& source) : stackSize{source.stackSize}
-        // {
-        //     elements = new T[stackSize];
-        //     for (auto i = 0; i < source.inserter; ++i)
-        //         push(source.elements[i]);
-        // }
+        template<typename T>
+        StackImpl<T>::StackImpl(const StackImpl<T>& source) : stackSize{source.stackSize}
+        {
+            elements = std::make_unique<T[]>(stackSize);
+            for (auto i = 0; i < source.inserter; ++i)
+                push(source.elements[i]);
+        }
         
         // template<typename T>
         // StackImpl<T>& StackImpl<T>::operator=(StackImpl<T>const& source)

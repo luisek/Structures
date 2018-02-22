@@ -93,25 +93,25 @@ TEST_F(StackImplFixture, Stack_CreateBigStack)
 	ASSERT_EQ(stack.empty(), false);
 }
 
-// TEST_F(StackImplFixture, Stack_CopyCtorTest)
-// {
-// 	mpb::StackImpl<int> stack{};
+TEST_F(StackImplFixture, Stack_CopyCtorTest)
+{
+	mpb::StackImpl<int> stack{};
 	
-// 	stack.push(1);
-// 	stack.push(2);
-// 	stack.push(3);
-// 	stack.push(4);
+	stack.push(1);
+	stack.push(2);
+	stack.push(3);
+	stack.push(4);
 
-// 	mpb::StackImpl<int> newStack{ stack };
+	mpb::StackImpl<int> newStack{ stack };
 
-// 	ASSERT_EQ(stack.pop(), newStack.pop());
-// 	ASSERT_EQ(stack.pop(), newStack.pop());
-// 	ASSERT_EQ(stack.pop(), newStack.pop());
-// 	ASSERT_EQ(stack.pop(), newStack.pop());
+	ASSERT_EQ(stack.pop(), newStack.pop());
+	ASSERT_EQ(stack.pop(), newStack.pop());
+	ASSERT_EQ(stack.pop(), newStack.pop());
+	ASSERT_EQ(stack.pop(), newStack.pop());
 
-// 	ASSERT_EQ(stack.empty(), true);
-// 	ASSERT_EQ(newStack.empty(), true);
-// }
+	ASSERT_EQ(stack.empty(), true);
+	ASSERT_EQ(newStack.empty(), true);
+}
 
 // TEST_F(StackImplFixture, Stack_CopyAssignmentTest)
 // {
