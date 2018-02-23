@@ -46,13 +46,15 @@ namespace mpb
 	template<typename T>
 	Stack<T>::Stack(Stack<T>&& source)
 	{
-		
+		stackImpl = std::make_unique<StackImpl<T>>(std::move(*source.stackImpl));
+		source.stackImpl = nullptr;
 	}
 
 	template<typename T>
 	Stack<T>& Stack<T>::operator=(Stack<T>&& source)
 	{
-		
+		stackImpl = std::move(source.stackImpl);
+		source.stackImpl = nullptr;
 	}
 
 	template<typename T>

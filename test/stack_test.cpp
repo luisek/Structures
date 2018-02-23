@@ -95,3 +95,44 @@ TEST_F(StackFixture, Stack_CopyAssignmentTest)
 	ASSERT_EQ(stack.empty(), true);
 	ASSERT_EQ(newStack.empty(), true);
 }
+
+TEST_F(StackFixture, Stack_MoveCtorTest)
+{
+	mpb::Stack<int> stack{};
+
+	stack.push(1);
+	stack.push(2);
+	stack.push(3);
+	stack.push(4);
+
+	mpb::Stack<int> newStack{std::move(stack)};
+
+	ASSERT_EQ(newStack.pop(),4);
+	ASSERT_EQ(newStack.pop(),3);
+	ASSERT_EQ(newStack.pop(),2);
+	ASSERT_EQ(newStack.pop(),1);
+
+	ASSERT_EQ(newStack.empty(), true);
+}
+
+TEST_F(StackFixture, Stack_MoveAssignmentTest)
+{
+	mpb::Stack<int> stack{};
+
+	stack.push(1);
+	stack.push(2);
+	stack.push(3);
+	stack.push(4);
+
+	mpb::Stack<int> newStack{};
+
+	ASSERT_EQ(newStack.empty(), true);
+
+	newStack = std::move(stack);
+
+	ASSERT_EQ(newStack.pop(), 4);
+	ASSERT_EQ(newStack.pop(), 3);
+	ASSERT_EQ(newStack.pop(), 2);
+	ASSERT_EQ(newStack.pop(), 1);
+	ASSERT_EQ(newStack.empty(), true);
+}
